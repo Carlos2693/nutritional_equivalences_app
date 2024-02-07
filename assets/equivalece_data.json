@@ -1,0 +1,33 @@
+{
+  "breakfast": {
+    "vegetableGroup": 2.0,
+    "fruitGroup": 1.0,
+    "cerealsGroup": 2.0,
+    "foodAnimalOriginGroup": 3.0,
+    "dairyGroup":1.0,
+    "fatsWithoutProteinGroup": 2.0
+  },
+  "collation": {
+    "vegetableGroup": 1.0,
+    "fruitGroup": 1.0,
+    "cerealsGroup": 0.5,
+    "fatsWithProteinGroup": 1.0
+  },
+  "mealTime": {
+    "vegetableGroup": 2.0,
+    "cerealsGroup": 2.0,
+    "foodAnimalOriginGroup": 4.0,
+    "fatsWithProteinGroup": 2.0
+  },
+  "collation2": {
+    "fruitGroup": 1.0,
+    "cerealsGroup": 0.5,
+    "fatsWithProteinGroup": 1.0
+  },
+  "dinner": {
+    "vegetableGroup": 2.0,
+    "cerealsGroup": 2.0,
+    "foodAnimalOriginGroup": 2.0,
+    "fatsWithoutProteinGroup": 2.0
+  }
+}

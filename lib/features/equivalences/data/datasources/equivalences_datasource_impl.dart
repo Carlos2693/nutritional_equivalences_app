@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutritional_equivalences_app/features/equivalences/data/data.dart';
 
 import 'dart:convert';
 
@@ -22,6 +23,6 @@ class EquivalencesDatasourceImpl extends EquivalencesDatasource {
   Future<TimeDay> getEquivalences(BuildContext context) async {
     final jsonString = await _getData(context);
     final jsonResult = jsonDecode(jsonString);
-    return TimeDay.fromJson(jsonResult);
+    return TimeDayMapper.jsonToEntity(jsonResult);
   }
 }

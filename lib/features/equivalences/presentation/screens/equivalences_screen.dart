@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import 'package:nutritional_equivalences_app/features/equivalences/presentation/providers/provider.dart';
 
 class EquivalencesScreen extends StatelessWidget {
   const EquivalencesScreen({super.key});
@@ -28,8 +28,8 @@ class _EquivalencesViewState extends ConsumerState {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    ref.read(productsProvider.notifier).loadData(context);
   }
 
   @override
@@ -40,19 +40,12 @@ class _EquivalencesViewState extends ConsumerState {
 
   @override
   Widget build(BuildContext context) {
+    
+    final timeDay = ref.watch(productsProvider).timeDay;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: MasonryGridView.count(
-        // TODO controller: ,
-        physics: const BouncingScrollPhysics(),
-        crossAxisCount: 2,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 35,
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return const Text('MasonryGridView example');
-        },
-      ),
+      child: Text(timeDay.toString()),
     );
   }
 }

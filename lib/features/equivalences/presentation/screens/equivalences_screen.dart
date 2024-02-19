@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'dart:math' show pow;
+
 import 'package:nutritional_equivalences_app/features/equivalences/domain/domain.dart';
 import 'package:nutritional_equivalences_app/features/equivalences/presentation/providers/provider.dart';
 
@@ -74,7 +76,7 @@ class _MealsOfDayScreen extends StatelessWidget {
           // TODO make blank object
           equivalence: equivalence!,
           onClick: (String key, String value) {
-            print('$key, $value');
+            // print('$key, $value');
           },
         );
       },
@@ -149,27 +151,16 @@ class _BodyFoodTime extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> list = [];
 
-    final key = 'vegetableGroup';
-    final value = equivalence.vegetableGroup;
-
-    final widget = GestureDetector(
-      onTap: onClick(key, value.toString()),
-      child: _CustomChip(
-        contentLabel: key,
-        contentAvatar: value.toString(),
-      ),
-    );
-    list.add(widget);
-    // equivalence.forEach((key, value) {
-    //   final widget = GestureDetector(
-    //     onTap: onClick(key, value.toString()),
-    //     child: _CustomChip(
-    //       contentLabel: key,
-    //       contentAvatar: value.toString(),
-    //     ),
-    //   );
-    //   list.add(widget);
-    // });
+    equivalence.numberByGroup.forEach((key, value) {
+      final widget = GestureDetector(
+        onTap: onClick(key, value.toString()),
+        child: _CustomChip(
+          contentLabel: key,
+          contentAvatar: value,
+        ),
+      );
+      list.add(widget);
+    });
 
     return Wrap(
       spacing: 6.0,
@@ -181,20 +172,45 @@ class _BodyFoodTime extends StatelessWidget {
 
 class _CustomChip extends StatelessWidget {
   final String contentLabel;
-  final String contentAvatar;
+  final double contentAvatar;
 
   const _CustomChip({
     required this.contentLabel,
     required this.contentAvatar,
   });
 
+  String buildCountFraction(double count) {
+    const places = 2;
+  
+    final fraction = (count % 1 * pow(10, places)).floor();
+    final integer = count.floor();
+
+    var suffix = '';
+    switch (fraction) {
+      case 25:
+        suffix = '¼';
+      case 50:
+        suffix = '½';
+      case 75:
+        suffix = '¾';
+      default:
+        suffix = '';
+    }
+
+    if (integer == 0) {
+      return suffix;
+    }
+    return "$integer$suffix";
+  }
+
   @override
   Widget build(BuildContext context) {
+    final finalAvatar = buildCountFraction(contentAvatar);
     return Chip(
       labelPadding: const EdgeInsets.all(2.0),
       avatar: CircleAvatar(
         backgroundColor: Colors.white70,
-        child: Text(contentAvatar),
+        child: Text(finalAvatar),
       ),
       label: Text(contentLabel, style: const TextStyle(color: Colors.white)),
       backgroundColor: Colors.redAccent,

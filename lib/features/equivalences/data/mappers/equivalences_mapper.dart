@@ -1,16 +1,19 @@
 import 'package:nutritional_equivalences_app/features/equivalences/domain/domain.dart';
 
 class EquivalencesMapper {
-  static jsonToEntity(Map<String, dynamic> json) => Equivalence(
-    nameEquivalence: json['nameEquivalence'] ?? '',
-    vegetableGroup: json['vegetableGroup'] ?? 0.0,
-    fruitGroup: json['fruitGroup'] ?? 0.0,
-    cerealsGroup: json['cerealsGroup'] ?? 0.0,
-    foodAnimalOriginGroup: json['foodAnimalOriginGroup'] ?? 0.0,
-    legumesGroup: json['legumesGroup'] ?? 0.0,
-    dairyGroup: json['dairyGroup'] ?? 0.0,
-    fatsWithoutProteinGroup: json['fatsWithoutProteinGroup'] ?? 0.0,
-    fatsWithProteinGroup: json['fatsWithProteinGroup'] ?? 0.0,
-    sugarsGroup: json['sugarsGroup'] ?? 0.0,
-  );
+  static Equivalence jsonToEntity(Map<String, dynamic> json) {
+    final mapBuilded = <String, double>{};
+
+    json.forEach((key, value) {
+      if (value is double) {
+        mapBuilded[key] = value;
+      } else if(value is String) {
+        mapBuilded[key] = double.tryParse(value) ?? 0.0;
+      } else {
+        mapBuilded[key] = 0.0;
+      }
+    });
+
+    return Equivalence(numberByGroup: mapBuilded);
+  }
 }

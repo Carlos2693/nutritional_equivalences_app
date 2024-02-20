@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class HeaderFoodTime extends StatelessWidget {
+  final String visibleTitle;
   final String title;
   final Function(String) onClick;
 
   const HeaderFoodTime({
     super.key,
+    required this.visibleTitle,
     required this.title,
     required this.onClick,
   });
@@ -24,7 +26,7 @@ class HeaderFoodTime extends StatelessWidget {
             Radius.circular(16),
           ),
         ),
-        child: Text(title),
+        child: Text(visibleTitle),
       ),
     );
   }

@@ -14,23 +14,22 @@ class BodyFoodTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> list = [];
 
-    equivalence.numberByGroup.forEach((key, value) {
-      final widget = GestureDetector(
-        onTap: onClick(key, value.toString()),
+    final entries = equivalence.numberByGroup.entries;
+    final widgetList = entries.map((entry) {
+      return GestureDetector(
+        onTap: () { },
         child: CustomChip(
-          contentLabel: key,
-          contentAvatar: value,
+          contentLabel: entry.key,
+          contentAvatar: entry.value,
         ),
       );
-      list.add(widget);
-    });
+    }).toList();
 
     return Wrap(
       spacing: 6.0,
       runSpacing: 6.0,
-      children: list,
+      children: widgetList,
     );
   }
 }

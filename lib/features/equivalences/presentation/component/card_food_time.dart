@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nutritional_equivalences_app/config/const/const.dart';
+import 'package:nutritional_equivalences_app/config/extension/object.dart';
 
 import 'package:nutritional_equivalences_app/features/equivalences/domain/domain.dart';
 import 'package:nutritional_equivalences_app/features/equivalences/presentation/component/component.dart';
@@ -21,7 +22,7 @@ class CardFoodTime extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cardFoodSelected = ref.watch(cardFoodTimeProvider);
-    final newTitle = foodTimes[title] ?? 'pp';
+    final newTitle = foodTimes[title].value();
 
     return Column(
       children: [

@@ -1,3 +1,4 @@
+import 'package:nutritional_equivalences_app/config/extension/object.dart';
 import 'package:nutritional_equivalences_app/features/equivalences/domain/domain.dart';
 
 class EquivalencesMapper {
@@ -8,7 +9,7 @@ class EquivalencesMapper {
       if (value is double) {
         mapBuilded[key] = value;
       } else if(value is String) {
-        mapBuilded[key] = double.tryParse(value) ?? 0.0;
+        mapBuilded[key] = double.tryParse(value).value();
       } else {
         mapBuilded[key] = 0.0;
       }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:nutritional_equivalences_app/config/const/const.dart';
 import 'package:nutritional_equivalences_app/config/extension/object.dart';
 import 'package:nutritional_equivalences_app/features/equivalences/domain/domain.dart';
@@ -19,10 +21,12 @@ class BodyFoodTime extends StatelessWidget {
 
     final entries = equivalence.numberByGroup.entries;
     final widgetList = entries.map((entry) {
-      portionsByName[entry.key].value();
-      final newKey = portionsByName[entry.key].value();
+      final entryKey = entry.key;
+      final newKey = portionsByName[entryKey].value();
       return GestureDetector(
-        onTap: () { },
+        onTap: () {
+          context.push('/group/$entryKey');
+        },
         child: CustomChip(
           contentLabel: newKey,
           contentAvatar: entry.value,
